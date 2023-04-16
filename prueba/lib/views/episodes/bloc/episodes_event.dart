@@ -8,3 +8,9 @@ class LoadEpisodes extends EpisodesEvent {
 
   LoadEpisodes({this.page = 1});
 }
+
+class LoadMoreEpisodes extends EpisodesEvent {
+  final int? page;
+
+  LoadMoreEpisodes({this.page});
+}

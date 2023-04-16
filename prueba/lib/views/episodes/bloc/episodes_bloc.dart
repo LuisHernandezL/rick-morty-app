@@ -14,6 +14,7 @@ class EpisodesBloc extends Bloc<EpisodesEvent, EpisodesState> {
       : episodesRepository = EpisodeRepository(),
         super(EpisodesState.empy) {
     on<LoadEpisodes>(_handleEpisodesEvent);
+    on<LoadMoreEpisodes>(_handleLoadMoreEpisodes);
   }
 
   Future<void> _handleEpisodesEvent(
@@ -22,11 +23,29 @@ class EpisodesBloc extends Bloc<EpisodesEvent, EpisodesState> {
   ) async {
     emit(state.copyWith(status: EpisodesStatus.loading));
     try {
-      final episodes = await episodesRepository.getEpisodes();
+      final episodes = await episodesRepository.getEpisodes(1);
       emit(state.copyWith(
         status: EpisodesStatus.success,
         episodes: episodes.results,
       ));
+    } catch (e) {
+      emit(state.copyWith(status: EpisodesStatus.failure));
+    }
+  }
+
+  Future<void> _handleLoadMoreEpisodes(
+    LoadMoreEpisodes event,
+    Emitter<EpisodesState> emit,
+  ) async {
+    emit(state.copyWith(status: EpisodesStatus.loading));
+    try {
+      final episodes = await episodesRepository.getEpisodes(event.page);
+      if (episodes.info!.next != null) {
+        emit(state.copyWith(
+          status: EpisodesStatus.success,
+          episodes: [...state.episodes, ...episodes.results!],
+        ));
+      }
     } catch (e) {
       emit(state.copyWith(status: EpisodesStatus.failure));
     }

@@ -173,63 +173,65 @@ class _HomeViewState extends State<HomeView>
   }
 
   Widget _home(String username) {
-    return Column(
-      children: [
-        const SizedBox(
-          height: 45,
-        ),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          height: 50,
-          width: double.infinity,
-          child: const Text(
-            'Home',
-            style: TextStyle(
-              fontSize: 25,
-              fontWeight: FontWeight.w400,
-              color: Colors.white,
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          const SizedBox(
+            height: 45,
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            height: 50,
+            width: double.infinity,
+            child: const Text(
+              'Home',
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.w400,
+                color: Colors.white,
+              ),
             ),
           ),
-        ),
-        const SizedBox(
-          height: 12,
-        ),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          height: 50,
-          width: double.infinity,
-          child: Text(
-            'Welcome, $username',
-            style: const TextStyle(
-              fontSize: 19,
-              fontWeight: FontWeight.w400,
-              color: Colors.white,
+          const SizedBox(
+            height: 12,
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            height: 50,
+            width: double.infinity,
+            child: Text(
+              'Welcome, $username',
+              style: const TextStyle(
+                fontSize: 19,
+                fontWeight: FontWeight.w400,
+                color: Colors.white,
+              ),
             ),
           ),
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        BlocBuilder<CharactersBloc, CharactersState>(
-          builder: (context, state) {
-            return CardSwiper(
-              characters: state.characters,
-            );
-          },
-        ),
-        const SizedBox(
-          height: 40,
-        ),
-        BlocBuilder<EpisodesBloc, EpisodesState>(
-          builder: (context, state) {
-            return EpisodeSlider(
-              title: 'Some Episodes',
-              episodes: state.episodes,
-              onNextPage: () => null,
-            );
-          },
-        ),
-      ],
+          const SizedBox(
+            height: 20,
+          ),
+          BlocBuilder<CharactersBloc, CharactersState>(
+            builder: (context, state) {
+              return CardSwiper(
+                characters: state.characters,
+              );
+            },
+          ),
+          const SizedBox(
+            height: 40,
+          ),
+          BlocBuilder<EpisodesBloc, EpisodesState>(
+            builder: (context, state) {
+              return EpisodeSlider(
+                title: 'Some Episodes',
+                episodes: state.episodes,
+                onNextPage: () => null,
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
 }

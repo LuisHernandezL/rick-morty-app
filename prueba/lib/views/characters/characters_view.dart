@@ -94,11 +94,19 @@ class _CharactersViewState extends State<CharactersView> {
                                   children: [
                                     Hero(
                                       tag: e.heroId ?? e.id!,
-                                      child: SizedBox(
-                                        height: 114,
-                                        width: 114,
-                                        child: Image.network(
-                                          e.image!,
+                                      child: Container(
+                                        height: 150,
+                                        width: 150,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                        ),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(25),
+                                          child: Image.network(
+                                            e.image!,
+                                          ),
                                         ),
                                       ),
                                     ),

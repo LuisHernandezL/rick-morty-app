@@ -40,7 +40,7 @@ class _EpisodeSliderState extends State<EpisodeSlider> {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 260,
+      height: 165,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

@@ -174,61 +174,76 @@ class _HomeViewState extends State<HomeView>
 
   Widget _home(String username) {
     return SingleChildScrollView(
-      child: Column(
+      child: Stack(
         children: [
-          const SizedBox(
-            height: 45,
-          ),
+          //BACKGROUND ASSET IMAGE
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            height: 50,
+            height: MediaQuery.of(context).size.height * 0.95,
             width: double.infinity,
-            child: const Text(
-              'Home',
-              style: TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.w400,
-                color: Colors.white,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('images/wallpaper.jpg'),
+                fit: BoxFit.cover,
               ),
             ),
           ),
-          const SizedBox(
-            height: 12,
-          ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            height: 50,
-            width: double.infinity,
-            child: Text(
-              'Welcome, $username',
-              style: const TextStyle(
-                fontSize: 19,
-                fontWeight: FontWeight.w400,
-                color: Colors.white,
+          Column(
+            children: [
+              const SizedBox(
+                height: 45,
               ),
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          BlocBuilder<CharactersBloc, CharactersState>(
-            builder: (context, state) {
-              return CardSwiper(
-                characters: state.characters,
-              );
-            },
-          ),
-          const SizedBox(
-            height: 40,
-          ),
-          BlocBuilder<EpisodesBloc, EpisodesState>(
-            builder: (context, state) {
-              return EpisodeSlider(
-                title: 'Some Episodes',
-                episodes: state.episodes,
-                onNextPage: () => null,
-              );
-            },
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                height: 50,
+                width: double.infinity,
+                child: const Text(
+                  'Home',
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 12,
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                height: 50,
+                width: double.infinity,
+                child: Text(
+                  'Welcome, $username',
+                  style: const TextStyle(
+                    fontSize: 19,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              BlocBuilder<CharactersBloc, CharactersState>(
+                builder: (context, state) {
+                  return CardSwiper(
+                    characters: state.characters,
+                  );
+                },
+              ),
+              const SizedBox(
+                height: 40,
+              ),
+              BlocBuilder<EpisodesBloc, EpisodesState>(
+                builder: (context, state) {
+                  return EpisodeSlider(
+                    title: 'Some Episodes',
+                    episodes: state.episodes,
+                    onNextPage: () => null,
+                  );
+                },
+              ),
+            ],
           ),
         ],
       ),
